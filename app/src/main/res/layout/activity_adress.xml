@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.hoang.hoabanfood1.Activity.ChiTietSP">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarchitietsp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#f3216e"
+        app:title="Địa chỉ cửa hàng"
+        app:titleTextColor="#ffffff">
+    </android.support.v7.widget.Toolbar>
+    <com.google.android.gms.maps.MapView
+        android:layout_width="match_parent"
+        android:id="@+id/mapview"
+        android:layout_height="@dimen/_250sdp"></com.google.android.gms.maps.MapView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_directionfind"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Find"/>
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_24sdp" />
+        <TextView
+            android:id="@+id/tvDistance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_24sdp"
+            android:layout_marginLeft="@dimen/_5sdp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_mylocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Loacation"/>
+</LinearLayout>
