@@ -12,7 +12,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbargiohang"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="@dimen/_52sdp"
         android:background="#f3216e"
         app:title="Giỏ hàng của bạn"
         app:titleTextColor="#ffffff"
@@ -21,20 +21,24 @@
 
         <ImageButton
             android:id="@+id/btn_dsdonhang"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="160dp"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginLeft="@dimen/_130sdp"
             android:background="@drawable/icondsdonhang" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_3sdp"
+        android:layout_marginRight="@dimen/_3sdp"
         android:layout_weight="7">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/duongviengoctron_item">
 
             <TextView
                 android:id="@+id/txtv_thongbao"
@@ -43,13 +47,16 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text="Giỏ hàng của bạn đang trống"
+                android:textColor="#f3216e"
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
             <ListView
                 android:id="@+id/lv_giohang"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></ListView>
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/_10sdp"
+                android:paddingRight="@dimen/_10sdp"></ListView>
         </FrameLayout>
     </LinearLayout>
 
@@ -69,11 +76,12 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
+                android:layout_marginLeft="@dimen/_35sdp"
                 android:layout_marginTop="10dp"
 
                 android:text="Tổng tiền = "
-                android:textSize="20dp"
+                android:textColor="#f3216e"
+                android:textSize="@dimen/_17sdp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -86,39 +94,76 @@
                 android:id="@+id/txtv_tongtien"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
+                android:layout_marginLeft="@dimen/_25sdp"
                 android:layout_marginTop="10dp"
                 android:text="Giá trị"
-                android:textSize="20dp"
+                android:textColor="#f3216e"
+                android:textSize="@dimen/_17sdp"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
-
-        <Button
-            android:id="@+id/btn_dathang"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Đặt hàng" />
-    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp">
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp">
 
-        <Button
-            android:id="@+id/btn_muatiep"
+        <LinearLayout
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/colorAccent" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/colorAccent" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Tiếp tục mua hàng" />
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <Button
+                android:id="@+id/btn_dathang"
+                android:layout_width="30dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_weight="4.9"
+                android:text="Đặt hàng"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:background="@drawable/duongvien_goctron"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"/>
+
+            <Button
+                android:id="@+id/btn_muatiep"
+                android:layout_width="30dp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_weight="4.9"
+                android:text="Tiếp tục mua hàng"
+                android:textColor="#ffffff"
+                android:textAllCaps="false"
+                android:background="@drawable/duongvien_goctron"/>
+        </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>

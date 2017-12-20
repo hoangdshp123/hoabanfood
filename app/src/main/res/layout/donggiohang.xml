@@ -33,7 +33,7 @@
             android:layout_margin="5dp"
             android:text="Tên sp"
             android:textColor="#000000"
-            android:textSize="30dp" />
+            android:textSize="20dp" />
         <TextView
             android:id="@+id/txtv_giaspcart"
             android:layout_width="wrap_content"
@@ -41,41 +41,43 @@
             android:layout_margin="5dp"
             android:text="Giá"
             android:textColor="#000000"
-            android:textSize="20dp" />
+            android:textSize="16dp" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:weightSum="10"
             android:orientation="horizontal">
             <ImageButton
                 android:id="@+id/btn_xoakhoicart"
                 android:layout_weight="1"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="20dp"
+                android:layout_height="25dp"
                 android:background="@drawable/icondelete"/>
             <ImageButton
                 android:id="@+id/btn_tru"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginLeft="30dp"
                 android:padding="5dp"
                 android:layout_marginTop="3dp"
                 android:background="@drawable/iconsminus"/>
             <TextView
                 android:id="@+id/txtv_slcart"
-                android:layout_width="35dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:gravity="center"
                 android:text="1"
                 android:textStyle="bold"
-                android:textSize="30dp"/>
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="6dp"
+                android:textSize="20dp"/>
             <ImageButton
                 android:id="@+id/btn_cong"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:padding="5dp"
                 android:layout_marginTop="3dp"
+                android:layout_marginLeft="6dp"
                 android:background="@drawable/iconsplus"/>
         </LinearLayout>
     </LinearLayout>

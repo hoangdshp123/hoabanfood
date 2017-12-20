@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.example.hoang.hoabanfood1.Model.FirstFragment;
-import com.example.hoang.hoabanfood1.Model.SecondFragment;
-import com.example.hoang.hoabanfood1.Model.ThirdFragment;
+import com.example.hoang.hoabanfood1.Fragment.FirstFragment;
+import com.example.hoang.hoabanfood1.Fragment.SecondFragment;
+import com.example.hoang.hoabanfood1.Fragment.ThirdFragment;
 
 /**
  * Created by hoang on 10/20/2017.

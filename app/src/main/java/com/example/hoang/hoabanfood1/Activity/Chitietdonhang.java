@@ -131,6 +131,7 @@ public class Chitietdonhang extends AppCompatActivity {
             madonhang = Integer.parseInt(extras.getString("madonhang"));
             Log.d("gia tri loaisp", madonhang + "");
         }
+
     }
 
     private void Anhxa() {

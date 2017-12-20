@@ -48,10 +48,27 @@
             android:drawablePadding="30dp"
             android:hint="Phone number" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Chú ý"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="Thông tin của bạn phải chính xác để chúng tôi có thể liên lạc"
+            android:textSize="18sp"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
+            android:weightSum="10"
             android:orientation="horizontal">
 
             <Button
@@ -61,19 +78,23 @@
                 android:layout_gravity="center"
                 android:background="@drawable/duongvien_goctron"
                 android:text="Xác nhận"
+                android:layout_weight="4.9"
                 android:textAllCaps="false"
-                android:textColor="#000000" />
-
+                android:textColor="#ffffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"/>
             <Button
                 android:id="@+id/btn_trolai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="110dp"
                 android:background="@drawable/duongvien_goctron"
                 android:text="Trở lại"
+                android:layout_weight="4.9"
                 android:textAllCaps="false"
-                android:textColor="#000000" />
+                android:textColor="#ffffff" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

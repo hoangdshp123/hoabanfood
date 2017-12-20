@@ -3,6 +3,16 @@
     <group
         android:id="@+id/group1"
         android:checkableBehavior="single">
+        <item android:title="Home">
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@drawable/iconhome"
+                android:title="Trang chủ" />
+        </item>
+    </group>
+    <group
+        android:id="@+id/group2"
+        android:checkableBehavior="single">
         <item android:title="Liên hệ">
             <item
                 android:id="@+id/nav_hotline"
@@ -15,13 +25,31 @@
         </item>
     </group>
     <group
-        android:id="@+id/group2"
+        android:id="@+id/group3"
         android:checkableBehavior="single">
         <item android:title="Danh mục sản phẩm">
                 <item
                     android:id="@+id/nav_loaisp"
-                    android:icon="@mipmap/ic_launcher"
+                    android:icon="@drawable/iconshop"
                     android:title="Loại sản phẩm" />
+
+        </item>
+        <item android:title="Thanh Toán">
+            <item
+                android:id="@+id/nav_thanhtoan"
+                android:icon="@drawable/iconpay"
+                android:title="Thanh Toán" />
+
+        </item>
+    </group>
+    <group
+        android:id="@+id/group4"
+        android:checkableBehavior="single">
+        <item android:title="Giới thiệu">
+            <item
+                android:id="@+id/nav_gioithieu"
+                android:icon="@drawable/icongioithieu"
+                android:title="Giới thiệu" />
 
         </item>
     </group>

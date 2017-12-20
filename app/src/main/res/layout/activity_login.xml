@@ -19,18 +19,18 @@
         android:id="@+id/edt_account"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:drawableLeft="@drawable/iconuser"
-        android:drawablePadding="30dp"
+        android:drawablePadding="@dimen/_25sdp"
         android:hint="User" />
 
     <EditText
         android:id="@+id/edt_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:drawableLeft="@drawable/iconpassword"
-        android:drawablePadding="30dp"
+        android:drawablePadding="@dimen/_25sdp"
         android:hint="Password"
         android:inputType="textPassword" />
 
@@ -42,7 +42,8 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/duongvien_goctron"
         android:text="Login"
-        android:textSize="20dp" />
+        android:textColor="#ffffff"
+        android:textSize="@dimen/_15sdp" />
 
     <TextView
         android:id="@+id/tv_regiter"
@@ -51,5 +52,5 @@
         android:text="Bạn chưa có tài khoản ?"
         android:layout_gravity="center"
         android:textColor="#0401d6"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="@dimen/_20sdp"/>
 </LinearLayout>

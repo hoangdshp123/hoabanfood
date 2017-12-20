@@ -1,7 +1,10 @@
 package com.example.hoang.hoabanfood1.Activity;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,6 +12,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -21,8 +25,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.example.hoang.hoabanfood1.Adapter.TablayoutAdapter;
 import com.example.hoang.hoabanfood1.Connect.CheckConection;
 import com.example.hoang.hoabanfood1.Model.Giohang;
@@ -54,7 +60,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ActionBar();
             ActionViewFiliper();
             Movetologin();
-            Setclickrecyclerview();
             initView();
             Dangxuat();
         } else {
@@ -66,17 +71,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void EventNavigation() {
         navigationViewmenu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.nav_loaisp:{
+                switch (item.getItemId()) {
+                    case R.id.nav_loaisp: {
                         Intent intentloaoisp = new Intent(MainActivity.this, LoaiSP.class);
                         startActivity(intentloaoisp);
-                    }break;
-                    case R.id.nav_diachi:{
+                    }
+                    break;
+                    case R.id.nav_diachi: {
                         Intent intentdiachi = new Intent(MainActivity.this, Adress.class);
                         startActivity(intentdiachi);
                     }
+                    break;
+                    case R.id.nav_hotline: {
+                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("tel:" + "0982429650"));
+                        startActivity(intent);
+                    }break;
+                    case  R.id.nav_home: {
+                        Toast.makeText(MainActivity.this, "Về màn hình chính !", Toast.LENGTH_SHORT).show();
+                    }break;
+                    case R.id.nav_gioithieu:{
+                        Intent intentgioithieu = new Intent(MainActivity.this, GioiThieuActivity.class);
+                        startActivity(intentgioithieu);
+                    }break;
+                    case R.id.nav_thanhtoan:{
+                        Intent intentthanhtoan = new Intent(MainActivity.this, ThanhToanActivity.class);
+                        startActivity(intentthanhtoan);
+                    }
+
                 }
                 return false;
             }
@@ -89,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView txtv_headerlogn = hView.findViewById(R.id.txtv_headerlogn);
         TextView txtv_nameheader = hView.findViewById(R.id.txtv_nameheader);
         SharedPreferences preferences = getSharedPreferences("dangnhap", MODE_PRIVATE);
-        btn_formlogin.setImageResource(preferences.getInt("1", R.mipmap.ic_hearder));
+        //btn_formlogin.setImageResource(preferences.getInt("1", R.mipmap.ic_hearder));
         txtv_headerlogn.setText(preferences.getString("b", "Đăng nhập"));
         txtv_nameheader.setText(preferences.getString("c", ""));
         if(txtv_headerlogn.getText().equals("Đăng xuất")){
@@ -112,10 +136,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(new TablayoutAdapter(getSupportFragmentManager()));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
-
-    }
-
-    private void Setclickrecyclerview() {
+        viewPager.setOffscreenPageLimit(6);
+        viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
     }
 
 
@@ -146,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void ActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setNavigationIcon(android.R.drawable.ic_menu_sort_by_size);
+        toolbar.setNavigationIcon(R.drawable.iconsnavi);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,6 +218,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             manggiohang = new ArrayList<>();
         }
+    }
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("THOÁT")
+                .setMessage("Bạn có chắc chắn thoát khỏi ứng dụng?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                        homeIntent.addCategory(Intent.CATEGORY_HOME);
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(homeIntent);
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
     @Override

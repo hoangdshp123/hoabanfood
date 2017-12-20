@@ -30,7 +30,8 @@ public class Cart extends AppCompatActivity {
     CartAdapter cartAdapter;
     View header;
     TextView txtvusername;
-
+    String tam;
+    AlertDialog.Builder builder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,22 +48,43 @@ public class Cart extends AppCompatActivity {
         btndsdh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentdsdh = new Intent(Cart.this,Dsdonhang.class);
-                startActivity(intentdsdh);
-                finish();
+                if (tam.equals("")) {
+                    AlertDialog.Builder builder;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        builder = new AlertDialog.Builder(Cart.this);
+                    } else
+                        builder = new AlertDialog.Builder(Cart.this);
+
+                    builder.setTitle("Bạn chưa đăng nhập").setMessage("Bạn có muốn đăng nhập ?").
+                            setPositiveButton("No",new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            });
+                    builder.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intentdialog = new Intent(getApplicationContext(),Login.class);
+                            startActivity(intentdialog);
+                        }
+                    });
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }
+                else {
+                    Intent intentdsdh = new Intent(Cart.this,Dsdonhang.class);
+                    startActivity(intentdsdh);
+                    finish();
+                }
             }
         });
     }
 
     private void Dathang() {
-        View header = MainActivity.navigationView.getHeaderView(0);
-        txtvusername = header.findViewById(R.id.txtv_nameheader);
         btndathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String tam = txtvusername.getText().toString();
                 if (tam.equals("")) {
-                    AlertDialog.Builder builder;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                         builder = new AlertDialog.Builder(Cart.this);
                     } else
@@ -130,6 +152,8 @@ public class Cart extends AppCompatActivity {
     }
 
     private void Anhxa() {
+        View header = MainActivity.navigationView.getHeaderView(0);
+        txtvusername = header.findViewById(R.id.txtv_nameheader);
         lvcart = (ListView) findViewById(R.id.lv_giohang);
         txtvthongbao = (TextView) findViewById(R.id.txtv_thongbao);
         txtvtongtien = (TextView) findViewById(R.id.txtv_tongtien);
@@ -140,6 +164,7 @@ public class Cart extends AppCompatActivity {
         txtvslcart = (TextView) findViewById(R.id.txtv_slcart);
         lvcart.setAdapter(cartAdapter);
         btndsdh = (ImageButton) findViewById(R.id.btn_dsdonhang);
+        tam = txtvusername.getText().toString();
     }
 
 }

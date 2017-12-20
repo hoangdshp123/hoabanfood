@@ -3,9 +3,10 @@
     package="com.example.hoang.hoabanfood1">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +17,8 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/map_api_key"/>
+            android:value="@string/map_api_key" />
+
         <activity android:name=".Activity.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,6 +36,9 @@
         <activity android:name=".Activity.ThongtinKH" />
         <activity android:name=".Activity.Chitietdonhang" />
         <activity android:name=".Activity.LoaiSP" />
-        <activity android:name=".Activity.Adress"></activity>
+        <activity android:name=".Activity.Adress" />
+        <activity android:name=".Activity.GioiThieuActivity" />
+        <activity android:name=".Activity.ThanhToanActivity"></activity>
     </application>
+
 </manifest>
