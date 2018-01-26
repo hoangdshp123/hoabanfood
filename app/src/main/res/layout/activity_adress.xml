@@ -18,25 +18,31 @@
     <com.google.android.gms.maps.MapView
         android:layout_width="match_parent"
         android:id="@+id/mapview"
-        android:layout_height="@dimen/_300sdp"></com.google.android.gms.maps.MapView>
+        android:layout_height="@dimen/_350sdp"></com.google.android.gms.maps.MapView>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_45sdp"
         android:orientation="horizontal">
         <Button
             android:id="@+id/btn_directionfind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Find"/>
+            android:textColor="#fff"
+            android:text="Find"
+            android:textAllCaps="false"
+            android:background="@drawable/duongvien_goctron"/>
         <TextView
             android:id="@+id/tvDuration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/_24sdp" />
+            android:layout_marginLeft="@dimen/_7sdp"
+            android:textColor="#f3216e"
+            android:textSize="@dimen/_24sdp"/>
         <TextView
             android:id="@+id/tvDistance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#f3216e"
             android:textSize="@dimen/_24sdp"
             android:layout_marginLeft="@dimen/_5sdp"/>
     </LinearLayout>

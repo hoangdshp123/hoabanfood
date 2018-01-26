@@ -26,6 +26,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activity.WebViewActivity" />
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.Login" />
         <activity android:name=".Activity.Register" />
@@ -38,7 +39,10 @@
         <activity android:name=".Activity.LoaiSP" />
         <activity android:name=".Activity.Adress" />
         <activity android:name=".Activity.GioiThieuActivity" />
-        <activity android:name=".Activity.ThanhToanActivity"></activity>
+        <activity android:name=".Activity.ThanhToanActivity" />
+        <activity android:name=".Activity.ListVideoActivity"></activity>
+        <activity android:name=".Activity.VideosActivity" />
+        <activity android:name=".Activity.Tam"></activity>
     </application>
 
 </manifest>

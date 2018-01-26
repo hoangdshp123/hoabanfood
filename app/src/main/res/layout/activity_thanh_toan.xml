@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.hoang.hoabanfood1.Activity.ThanhToanActivity">
+    android:orientation="vertical"
 
-</android.support.constraint.ConstraintLayout>
+    tools:context="com.example.hoang.hoabanfood1.Activity.Cart">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbarthanhtoan"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#f3216e"
+        app:title="Thanh Toán"
+        app:titleTextColor="#ffffff"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="0dp"></android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="@dimen/_30sdp"
+        android:paddingRight="@dimen/_30sdp"
+        android:gravity="center"
+        android:text="Quý khách có thể thanh toán tiền bằng cách chuyển khoản vào số tài khoản ngân hàng của chúng tôi"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:paddingTop="@dimen/_50sdp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_50sdp">
+        <ImageButton
+            android:id="@+id/btn_agribank"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@drawable/logoagribank"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="09403472394728934"
+            android:textStyle="bold"
+            android:textSize="@dimen/_15sdp"
+            android:gravity="center"/>
+        <ImageButton
+            android:id="@+id/btn_techcombank"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:background="@drawable/logotechcombank"
+            android:layout_height="100dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="09432443244328934"
+            android:textStyle="bold"
+            android:textSize="@dimen/_15sdp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</LinearLayout>

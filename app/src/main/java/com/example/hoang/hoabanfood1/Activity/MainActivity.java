@@ -28,7 +28,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import com.ToxicBakery.viewpager.transforms.ZoomOutSlideTransformer;
 import com.example.hoang.hoabanfood1.Adapter.TablayoutAdapter;
 import com.example.hoang.hoabanfood1.Connect.CheckConection;
 import com.example.hoang.hoabanfood1.Model.Giohang;
@@ -99,6 +98,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     case R.id.nav_thanhtoan:{
                         Intent intentthanhtoan = new Intent(MainActivity.this, ThanhToanActivity.class);
                         startActivity(intentthanhtoan);
+                    }break;
+                    case R.id.nav_video:{
+                        Intent intentthanhtoan = new Intent(MainActivity.this, ListVideoActivity.class);
+                        startActivity(intentthanhtoan);
                     }
 
                 }
@@ -136,8 +139,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(new TablayoutAdapter(getSupportFragmentManager()));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(6);
-        viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
+ //       viewPager.setOffscreenPageLimit(6);
+//        viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
     }
 
 
@@ -222,7 +225,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this)
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.iconout)
                 .setTitle("THOÁT")
                 .setMessage("Bạn có chắc chắn thoát khỏi ứng dụng?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
