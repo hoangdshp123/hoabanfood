@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.example.hoang.hoabanfood1.Adapter.PlaylistAdapter;
 import com.example.hoang.hoabanfood1.Interface.CallAPIYoutubeSuccess;
 import com.example.hoang.hoabanfood1.Model.ModelApi.CallAPI;
-import com.example.hoang.hoabanfood1.Model.ModelApi.model.MessageListVideo.Item;
 import com.example.hoang.hoabanfood1.Model.ModelPlayListVideo;
 import com.example.hoang.hoabanfood1.Model.VideoInfo;
 import com.example.hoang.hoabanfood1.Model.YouTubeVideoView;
@@ -76,7 +75,7 @@ public class ListVideoActivity extends AppCompatActivity implements YouTubeVideo
             final int finalI = i;
             callAPI.Get_ListVideo(getApplicationContext(), SharedPrefsUtils.getStringPreference(getApplicationContext(), "playlistid" + i), new CallAPIYoutubeSuccess() {
                 @Override
-                public void OnSuccess(List<Item> videoinfos) {
+                public void OnSuccess(List<com.example.hoang.hoabanfood1.Model.ModelApi.model.MessageListVideo.Item> videoinfos) {
                     infoArrayList = new ArrayList<>();
                     for (int j = 0; j < videoinfos.size(); j++) {
                         String title, chaneltitle, playlistid, imgvideo, videoid;

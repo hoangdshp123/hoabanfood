@@ -14,52 +14,16 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:paddingTop="@dimen/_110sdp"
-        android:text="Nhóm 29: Ứng dụng mua bán đồ ăn"
+        android:text="Đặc sản, văn hoá, ẩm thực Tây Bắc"
         android:textColor="#000000"
         android:textSize="20sp"
         android:textStyle="bold" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
-        android:gravity="center"
-        android:text="GVHD: Trần Thanh Huân"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Các Thành viên trong nhóm:"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Nguyễn Ngọc Khang"
-        android:textSize="18sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text=" Nguyễn Ngọc Tiến"
-        android:textSize="18sp"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="Nguyễn Xuân Hoàng"
-        android:textSize="18sp"/>
+
     <TextView
         android:paddingTop="180dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="200dp"
         android:gravity="center"
         android:text="Deign by: Nguyễn Xuân Hoàng"
         android:textStyle="bold"

@@ -44,7 +44,7 @@ public class VideoYoutubeAdapter extends BaseAdapter {
     }
 
     public class ViewHolder{
-        public TextView txtvtitle,txtchaneltitle,txtvplaylistid;
+        public TextView txtvtitle,txtchaneltitle;
         public ImageView imgvideo;
     }
 
@@ -57,7 +57,6 @@ public class VideoYoutubeAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.row_list_video,null);
             viewHolder.txtvtitle = convertView.findViewById(R.id.txtv_title);
             viewHolder.txtchaneltitle = convertView.findViewById(R.id.txtv_chaneltitle);
-            viewHolder.txtvplaylistid = convertView.findViewById(R.id.txtv_playlistid);
             viewHolder.imgvideo = convertView.findViewById(R.id.img_video);
             convertView.setTag(viewHolder);
         }
@@ -68,7 +67,6 @@ public class VideoYoutubeAdapter extends BaseAdapter {
         VideoInfo videoInfo = (VideoInfo) getItem(position);
         viewHolder.txtvtitle.setText(videoInfo.getTitle());
         viewHolder.txtchaneltitle.setText(videoInfo.getChaneltitle());
-        viewHolder.txtvplaylistid.setText(videoInfo.getPlaylistid());
         Picasso.with(context).load(videoInfo.getUrlpicture())
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)

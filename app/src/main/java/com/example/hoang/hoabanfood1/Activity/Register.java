@@ -24,12 +24,13 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Register extends AppCompatActivity{
-    EditText edtaccount,edtpassword,edtretypepass,edttenkh,edtphonenumber;
+public class Register extends AppCompatActivity {
+    EditText edtaccount, edtpassword, edtretypepass, edttenkh, edtphonenumber;
     Button btnregister;
     int k;
     ArrayList<String> username1 = new ArrayList<>();
     ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,39 +50,35 @@ public class Register extends AppCompatActivity{
                 progressDialog.setMessage("Loading...");
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 progressDialog.show();
-                if(username.equals("")||password.equals("")||name.equals("")||phonenumber.equals("")){
+                if (username.equals("") || password.equals("") || name.equals("") || phonenumber.equals("")) {
                     progressDialog.dismiss();
                     Toast.makeText(Register.this, "Chưa nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     for (int i = 0; i < username1.size(); i++) {
                         if (username.equals(username1.get(i).toString())) {
                             k++;
                         }
                     }
-                    if (k==0) {
-                            if(password.equals(retypepass))
-                            {
-                                Response.Listener<String> listener = new Response.Listener<String>() {
-                                    @Override
-                                    public void onResponse(String response) {
-                                                Intent intent = new Intent(getApplicationContext(), Login.class);
-                                                Toast.makeText(getApplicationContext(), "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
-                                                startActivity(intent);
-                                        finish();
-                                    }
-                                };
-                                RegisterRequest request = new RegisterRequest(username, password, name, phonenumber, listener);
-                                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                                queue.add(request);
+                    if (k == 0) {
+                        if (password.equals(retypepass)) {
+                            Response.Listener<String> listener = new Response.Listener<String>() {
+                                @Override
+                                public void onResponse(String response) {
+                                    Intent intent = new Intent(getApplicationContext(), Login.class);
+                                    Toast.makeText(getApplicationContext(), "Đăng ký thành công !", Toast.LENGTH_SHORT).show();
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            };
+                            RegisterRequest request = new RegisterRequest(username, password, name, phonenumber, listener);
+                            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                            queue.add(request);
 
-                            }
-                            else {
-                                progressDialog.dismiss();
-                                Toast.makeText(getApplicationContext(),"Nhập lại mật khẩu sai !",Toast.LENGTH_SHORT).show();
-                            }
-                    }
-                    else{
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(getApplicationContext(), "Nhập lại mật khẩu sai !", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
                         progressDialog.dismiss();
                         Toast.makeText(Register.this, "Trùng tài khoản đã đăng ký !", Toast.LENGTH_SHORT).show();
                     }
@@ -96,9 +93,8 @@ public class Register extends AppCompatActivity{
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Server.duongdanusername, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                if(response != null){
-                    for(int i = 0; i< response.length();i++)
-                    {
+                if (response != null) {
+                    for (int i = 0; i < response.length(); i++) {
                         try {
                             JSONObject jsonObject = response.getJSONObject(i);
                             username1.add(jsonObject.getString("username"));
@@ -111,7 +107,7 @@ public class Register extends AppCompatActivity{
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                CheckConection.Thongbao(getApplicationContext(),error.toString());
+                CheckConection.Thongbao(getApplicationContext(), error.toString());
             }
         });
         requestQueue.add(jsonArrayRequest);

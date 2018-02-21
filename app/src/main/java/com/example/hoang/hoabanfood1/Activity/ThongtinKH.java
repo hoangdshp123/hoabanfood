@@ -31,6 +31,7 @@ import java.util.Map;
 public class ThongtinKH extends AppCompatActivity {
     EditText edtusername, edtname, edtsdt;
     Button btntrolai, btnxacnhan;
+    public static String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,7 @@ public class ThongtinKH extends AppCompatActivity {
         btnxacnhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String username = edtusername.getText().toString().trim();
+                username = edtusername.getText().toString().trim();
                 final String name = edtname.getText().toString().trim();
                 final String sdt = edtsdt.getText().toString().trim();
                 if (username.length() > 0 && name.length() > 0 && sdt.length() > 0) {

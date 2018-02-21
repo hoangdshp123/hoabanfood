@@ -53,20 +53,22 @@ public class Login extends AppCompatActivity implements NavigationView.OnNavigat
                             progressDialog.show();
                             if (success) {
                                 //dang nhap thanh cong!
-                                Toast.makeText(getApplicationContext(), "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 SharedPreferences preferences = getSharedPreferences("dangnhap", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = preferences.edit();
                                 String tenkh1 = object.getString("tenkh");
                                 String sdt1 = object.getString("sdt");
+                                int makh = object.getInt("makhachhang");
                                 editor.putInt("1", R.drawable.iconuser1);
                                 editor.putString("c", username);
                                 editor.putString("b", "Đăng xuất");
+                                editor.putInt("f",makh);
                                 editor.putString("d",tenkh1);
                                 editor.putString("e",sdt1);
                                 editor.commit();
                                 startActivity(intent);
                                 finish();
+                                Toast.makeText(getApplicationContext(), "Đăng nhập thành công !", Toast.LENGTH_SHORT).show();
                             } else {
                                 progressDialog.dismiss();
                                 Toast.makeText(Login.this,"Tài khoản hoặc mật khẩu không đúng !", Toast.LENGTH_SHORT).show();

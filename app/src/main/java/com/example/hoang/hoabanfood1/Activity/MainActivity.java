@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         viewPager.setAdapter(new TablayoutAdapter(getSupportFragmentManager()));
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
- //       viewPager.setOffscreenPageLimit(6);
+        viewPager.setOffscreenPageLimit(3);
 //        viewPager.setPageTransformer(true, new ZoomOutSlideTransformer());
     }
 
