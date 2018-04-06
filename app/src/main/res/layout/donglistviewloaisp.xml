@@ -2,36 +2,33 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:weightSum="10"
+    android:orientation="vertical"
     android:gravity="center"
     >
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="3">
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/img_loaisp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:src="@mipmap/ic_launcher"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="7">
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/txtv_loaisp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_margin="5dp"
+            android:gravity="center"
             android:text="Loại sản phẩm"
             android:textColor="#000000"
             android:textSize="20dp" />
     </LinearLayout>
+
 </LinearLayout>

@@ -31,13 +31,19 @@ import java.util.Map;
 public class ThongtinKH extends AppCompatActivity {
     EditText edtusername, edtname, edtsdt;
     Button btntrolai, btnxacnhan;
-    public static String username;
-
+    public static String username,type;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thongtin_kh);
         Anhxa();
+        if(type.equals("type1")){
+            edtusername.setText("");
+            edtname.setText("");
+            edtsdt.setText("");
+        }
+        else
         hienthithongtin();
         eventtrolai();
         if (CheckConection.haveNetworkConnection(getApplicationContext())) {
@@ -53,7 +59,13 @@ public class ThongtinKH extends AppCompatActivity {
                 username = edtusername.getText().toString().trim();
                 final String name = edtname.getText().toString().trim();
                 final String sdt = edtsdt.getText().toString().trim();
-                if (username.length() > 0 && name.length() > 0 && sdt.length() > 0) {
+                if(username.length() == 0 || name.length() == 0 || sdt.length() == 0){
+                    Toast.makeText(ThongtinKH.this, "Thông tin không đầy đủ !", Toast.LENGTH_SHORT).show();
+                }
+                else if (sdt.length() < 9){
+                    Toast.makeText(ThongtinKH.this, "Sai định dạng số điện thoại !", Toast.LENGTH_SHORT).show();
+                }
+                else if (username.length() > 0 && name.length() > 0 && sdt.length() > 0) {
                     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.duongdandonhang, new Response.Listener<String>() {
                         @Override
@@ -149,5 +161,7 @@ public class ThongtinKH extends AppCompatActivity {
         edtsdt = (EditText) findViewById(R.id.edt_infophonenumber);
         btntrolai = (Button) findViewById(R.id.btn_trolai);
         btnxacnhan = (Button) findViewById(R.id.btn_xacnhan);
+        intent = getIntent();
+        type = intent.getStringExtra("1");
     }
 }

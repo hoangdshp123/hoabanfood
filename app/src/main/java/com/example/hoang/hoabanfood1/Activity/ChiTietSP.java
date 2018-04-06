@@ -1,8 +1,11 @@
 package com.example.hoang.hoabanfood1.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -43,8 +46,8 @@ import java.util.Map;
 public class ChiTietSP extends AppCompatActivity {
     Toolbar toolbarchitietsp;
     EditText edtNoidung;
-    ImageView imghinhanhchitietsp,btnsend;
-    TextView txtvtensp,txtvgiasp,txtvghichu;
+    ImageView imghinhanhchitietsp, btnsend;
+    TextView txtvtensp, txtvgiasp, txtvghichu, txtvusername;
     Spinner spinner;
     View footerview;
     Button btnthemgiohang;
@@ -52,7 +55,7 @@ public class ChiTietSP extends AppCompatActivity {
     String tenchitiet;
     int giachitiet;
     String hinhanhchitiet;
-    String ghichu;
+    String ghichu, tam;
     int maloaisp;
     ListView listViewComment;
     int makhachhang;
@@ -61,9 +64,10 @@ public class ChiTietSP extends AppCompatActivity {
     CommentAdapter commentAdapter;
     boolean isloading = false;
     boolean limitdata = false;
-    int page= 1;
+    int page = 1;
 
     ImageButton btncart;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,9 +77,9 @@ public class ChiTietSP extends AppCompatActivity {
         CatchEventSpinner();
         Themvaogiohang();
         movetocart();
-        Getdata();
+        //Getdata();
         hienthithongtin();
-        sendComment();
+        //sendComment();
     }
 
     private void hienthithongtin() {
@@ -88,29 +92,53 @@ public class ChiTietSP extends AppCompatActivity {
         btnsend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(ChiTietSP.this, "Send coment success !", Toast.LENGTH_SHORT).show();
                 String noidung = edtNoidung.getText().toString();
                 if (noidung.equals("")){
                     Toast.makeText(ChiTietSP.this, "Bạn chưa nhập nội dung đánh giá !", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Response.Listener<String> listener = new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
+                    if (tam.equals("")) {
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            builder = new AlertDialog.Builder(ChiTietSP.this);
+                        } else
+                            builder = new AlertDialog.Builder(ChiTietSP.this);
 
-                            Toast.makeText(getApplicationContext(), "Comment success !", Toast.LENGTH_SHORT).show();
-                            edtNoidung.setText("");
-                            arrayComment = new ArrayList<>();
-                            commentAdapter = new CommentAdapter(arrayComment,getApplicationContext());
-                            listViewComment.setAdapter(commentAdapter);
-                            Getdata();
-                        }
-                    };
-                    CommentRequest request = new CommentRequest(makhachhang, masp, tenkh,noidung, listener);
-                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-                    queue.add(request);
+                        builder.setTitle("Bạn chưa đăng nhập").setMessage("Bạn có muốn đăng nhập ?").
+                                setPositiveButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                    }
+                                });
+                        builder.setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intentdialog = new Intent(getApplicationContext(), Login.class);
+                                startActivity(intentdialog);
+                            }
+                        });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    } else {
+                        Response.Listener<String> listener = new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                Toast.makeText(getApplicationContext(), "Comment success !", Toast.LENGTH_SHORT).show();
+                                edtNoidung.setText("");
+                                arrayComment = new ArrayList<>();
+                                commentAdapter = new CommentAdapter(arrayComment, getApplicationContext());
+                                listViewComment.setAdapter(commentAdapter);
+                                Getdata();
+                            }
+                        };
+                        CommentRequest request = new CommentRequest(makhachhang, masp, tenkh, noidung, listener);
+                        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                        queue.add(request);
+                    }
                 }
-                }
+//                Toast.makeText(ChiTietSP.this, "Send coment success !", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -128,27 +156,27 @@ public class ChiTietSP extends AppCompatActivity {
         btnthemgiohang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(MainActivity.manggiohang.size()>0){
+                if (MainActivity.manggiohang.size() > 0) {
                     int sl = Integer.parseInt(spinner.getSelectedItem().toString());
-                    boolean exists =false;
-                    for(int i=0;i<MainActivity.manggiohang.size();i++){
-                        if(MainActivity.manggiohang.get(i).getMasp()== masp) {
+                    boolean exists = false;
+                    for (int i = 0; i < MainActivity.manggiohang.size(); i++) {
+                        if (MainActivity.manggiohang.get(i).getMasp() == masp) {
                             MainActivity.manggiohang.get(i).setSoluong(MainActivity.manggiohang.get(i).getSoluong() + sl);
                             MainActivity.manggiohang.get(i).setTongtien(giachitiet * MainActivity.manggiohang.get(i).getSoluong());
                             exists = true;
                         }
                     }
-                    if(exists==false){
+                    if (exists == false) {
                         int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
-                        long tongtien = soluong*giachitiet;
-                        MainActivity.manggiohang.add(new Giohang(masp,tenchitiet,tongtien,hinhanhchitiet,soluong));
+                        long tongtien = soluong * giachitiet;
+                        MainActivity.manggiohang.add(new Giohang(masp, tenchitiet, tongtien, hinhanhchitiet, soluong));
                     }
-                }else{
+                } else {
                     int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
-                    long tongtien = soluong*giachitiet;
-                    MainActivity.manggiohang.add(new Giohang(masp,tenchitiet,tongtien,hinhanhchitiet,soluong));
+                    long tongtien = soluong * giachitiet;
+                    MainActivity.manggiohang.add(new Giohang(masp, tenchitiet, tongtien, hinhanhchitiet, soluong));
                 }
-                Intent movetocart = new Intent(getApplicationContext(),Cart.class);
+                Intent movetocart = new Intent(getApplicationContext(), Cart.class);
                 startActivity(movetocart);
                 finish();
             }
@@ -156,8 +184,8 @@ public class ChiTietSP extends AppCompatActivity {
     }
 
     private void CatchEventSpinner() {
-        Integer[] soluong = new  Integer[]{1,2,3,4,5,6,7,8,9,10};
-        ArrayAdapter<Integer> arrayadtapter = new ArrayAdapter<Integer>(this,android.R.layout.simple_spinner_dropdown_item,soluong);
+        Integer[] soluong = new Integer[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        ArrayAdapter<Integer> arrayadtapter = new ArrayAdapter<Integer>(this, android.R.layout.simple_spinner_dropdown_item, soluong);
         spinner.setAdapter(arrayadtapter);
     }
 
@@ -171,28 +199,32 @@ public class ChiTietSP extends AppCompatActivity {
         maloaisp = sanpham.getMaloaisp();
         txtvtensp.setText(tenchitiet);
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        txtvgiasp.setText("Giá: "+decimalFormat.format(sanpham.getGiasp())+"vnđ");
+        txtvgiasp.setText("Giá: " + decimalFormat.format(sanpham.getGiasp()) + "vnđ");
         txtvghichu.setText(ghichu);
         Picasso.with(getApplicationContext()).load(hinhanhchitiet)
                 .placeholder(R.drawable.loading)
                 .error(R.drawable.error)
                 .into(imghinhanhchitietsp);
     }
+
     private void Anhxa() {
-        toolbarchitietsp = (Toolbar)findViewById(R.id.toolbarchitietsp);
-        imghinhanhchitietsp = (ImageView)findViewById(R.id.img_chitietsp);
-        txtvtensp = (TextView)findViewById(R.id.txtv_tenchitietsp);
-        txtvgiasp  = (TextView)findViewById(R.id.txtv_giachitietsp);
-        txtvghichu = (TextView)findViewById(R.id.txtv_ghichu);
-        spinner = (Spinner)findViewById(R.id.spinner);
-        btnthemgiohang = (Button)findViewById(R.id.btn_themvaogiohang);
+        toolbarchitietsp = (Toolbar) findViewById(R.id.toolbarchitietsp);
+        imghinhanhchitietsp = (ImageView) findViewById(R.id.img_chitietsp);
+        txtvtensp = (TextView) findViewById(R.id.txtv_tenchitietsp);
+        txtvgiasp = (TextView) findViewById(R.id.txtv_giachitietsp);
+        txtvghichu = (TextView) findViewById(R.id.txtv_ghichu);
+        spinner = (Spinner) findViewById(R.id.spinner);
+        btnthemgiohang = (Button) findViewById(R.id.btn_themvaogiohang);
         btncart = (ImageButton) findViewById(R.id.btn_cartchitietsp);
         btnsend = (ImageView) findViewById(R.id.btn_sendcoment);
         edtNoidung = (EditText) findViewById(R.id.edt_noidung1);
         listViewComment = (ListView) findViewById(R.id.lv_comment);
         arrayComment = new ArrayList<>();
-        commentAdapter = new CommentAdapter(arrayComment,getApplicationContext());
+        commentAdapter = new CommentAdapter(arrayComment, getApplicationContext());
         listViewComment.setAdapter(commentAdapter);
+        View header = MainActivity.navigationView.getHeaderView(0);
+        txtvusername = header.findViewById(R.id.txtv_nameheader);
+        tam = txtvusername.getText().toString();
     }
 
     private void Getdata() {
@@ -206,25 +238,25 @@ public class ChiTietSP extends AppCompatActivity {
                 int masp1;
                 String username1;
                 String noidung1;
-                if(response!=null && response.length()!=2){
+                if (response != null && response.length() != 2) {
                     try {
                         JSONArray jsonArray = new JSONArray(response);
-                        for(int i = 0; i< response.length();i++){
+                        for (int i = 0; i < response.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             madanhgia1 = jsonObject.getInt("madanhgia");
                             makhachhang1 = jsonObject.getInt("makhachhang");
                             masp1 = jsonObject.getInt("masp");
                             username1 = jsonObject.getString("username");
                             noidung1 = jsonObject.getString("noidung");
-                            arrayComment.add(new ModelComment(username1,noidung1));
+                            arrayComment.add(new ModelComment(username1, noidung1));
                             commentAdapter.notifyDataSetChanged();
                         }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }else{
-                    limitdata= true;
+                } else {
+                    limitdata = true;
                     listViewComment.removeFooterView(footerview);
                 }
             }
@@ -233,12 +265,11 @@ public class ChiTietSP extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
             }
-        })
-        {
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                HashMap<String,String> param = new HashMap<String,String>();
-                param.put("masp",String.valueOf(masp));
+                HashMap<String, String> param = new HashMap<String, String>();
+                param.put("masp", String.valueOf(masp));
                 return param;
             }
         };

@@ -39,15 +39,27 @@ public class Dsdonhang extends AppCompatActivity {
     DsdonhangAdapter dsdonhangAdapter;
     String username1;
     View footerview;
+    String type1;
     boolean isloading = false;
     boolean limitdata = false;
+    Intent intent;
     mHandler mhandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dsdonhang);
         Anhxa();
-        Getdsdonhang();
+        intent = getIntent();
+        type1 = intent.getStringExtra("2");
+        if(type1.equals("type4")) {
+            SharedPreferences preferences = getSharedPreferences("dangnhap", MODE_PRIVATE);
+            username1 = preferences.getString("c", "");
+            Getdsdonhang(username1);
+        }
+        else if (type1.equals("type3")){
+            username1 = intent.getStringExtra("name");
+            Getdsdonhang(username1);
+        }
         //LoadMore();
         Movetochitietdh();
     }
@@ -86,7 +98,7 @@ public class Dsdonhang extends AppCompatActivity {
         });
     }
 
-    private void Getdsdonhang() {
+    private void Getdsdonhang(final String username) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.duongdandsdonhang, new Response.Listener<String>() {
             @Override
@@ -127,7 +139,7 @@ public class Dsdonhang extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> param = new HashMap<String, String>();
-                param.put("username",username1);
+                param.put("username",username);
                 return param;
             }
         };
@@ -135,8 +147,6 @@ public class Dsdonhang extends AppCompatActivity {
     }
     private void Anhxa() {
         lvdsdh = (ListView) findViewById(R.id.lv_donhang);
-        SharedPreferences preferences = getSharedPreferences("dangnhap", MODE_PRIVATE);
-        username1 = preferences.getString("c", "");
         arrayListdonhang = new ArrayList<>();
         dsdonhangAdapter = new DsdonhangAdapter(arrayListdonhang, getApplicationContext());
         lvdsdh.setAdapter(dsdonhangAdapter);
@@ -150,7 +160,7 @@ public class Dsdonhang extends AppCompatActivity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 0: lvdsdh.addFooterView(footerview);break;
-                case 1: Getdsdonhang();isloading=false;break;
+                case 1: Getdsdonhang(username1);isloading=false;break;
             }
             super.handleMessage(msg);
         }

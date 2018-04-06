@@ -4,7 +4,9 @@ package com.example.hoang.hoabanfood1.Connect;
  * Created by hoang on 9/30/2017.
  */
 public class Server {
-    public static String localhost = "172.16.200.210";
+    public static String localhost = "hoaban.net";
+//    public static String localhost = "192.168.0.106";
+//    public static String localhost = "192.168.1.24";
     public static String duongdanloaisp ="http://"+localhost+"/server/getloaisp.php";
     public static String duongdanspmoi ="http://"+localhost+"/server/getspmoi.php";
     public static String duongdanspgiare ="http://"+localhost+"/server/getspgiare.php";

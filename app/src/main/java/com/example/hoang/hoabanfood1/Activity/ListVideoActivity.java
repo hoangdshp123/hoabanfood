@@ -29,7 +29,6 @@ public class ListVideoActivity extends AppCompatActivity implements YouTubeVideo
     ArrayList<VideoInfo> infoArrayList;
     PlaylistAdapter playlistAdapter;
     ListView listplayid;
-    String videoid = "";
     public static ListView listViewsub;
     public static YouTubeVideoView mYouTubeVideoView;
     public static TextView txtvvideotitle;
@@ -41,26 +40,26 @@ public class ListVideoActivity extends AppCompatActivity implements YouTubeVideo
         setContentView(R.layout.activity_list_video);
         init();
         GetJsonYoutube();
-            YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtubeFragment);
-            youtubeFragment.initialize("YOUR API KEY",
-                    new YouTubePlayer.OnInitializedListener() {
-                        @Override
-                        public void onInitializationSuccess(YouTubePlayer.Provider provider,
-                                                            YouTubePlayer youTubePlayer, boolean b) {
-                            // do any work here to cue video, play video, etc.
-                            youTubePlayer.cueVideo("z5Jc7KiTLbs");
-                            youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
-                        }
+        YouTubePlayerFragment youtubeFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtubeFragment);
+        youtubeFragment.initialize("YOUR API KEY",
+                new YouTubePlayer.OnInitializedListener() {
+                    @Override
+                    public void onInitializationSuccess(YouTubePlayer.Provider provider,
+                                                        YouTubePlayer youTubePlayer, boolean b) {
+                        // do any work here to cue video, play video, etc.
+                        youTubePlayer.cueVideo(PlaylistAdapter.videoid);
+                        youTubePlayer.setPlayerStyle(YouTubePlayer.PlayerStyle.DEFAULT);
+                    }
 
-                        @Override
-                        public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                                            YouTubeInitializationResult youTubeInitializationResult) {
+                    @Override
+                    public void onInitializationFailure(YouTubePlayer.Provider provider,
+                                                        YouTubeInitializationResult youTubeInitializationResult) {
 
-                        }
-                    });
-            mYouTubeVideoView = (YouTubeVideoView) findViewById(R.id.youtube_view);
-            mYouTubeVideoView.setCallback(this);
-        }
+                    }
+                });
+        mYouTubeVideoView = (YouTubeVideoView) findViewById(R.id.youtube_view);
+        mYouTubeVideoView.setCallback(this);
+    }
 //        else {
 //            Toast.makeText(this, "Không có video !", Toast.LENGTH_SHORT).show();
 //        }

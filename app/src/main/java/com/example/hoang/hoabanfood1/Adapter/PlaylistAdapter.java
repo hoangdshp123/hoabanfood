@@ -1,6 +1,7 @@
 package com.example.hoang.hoabanfood1.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.hoang.hoabanfood1.Activity.ListVideoActivity;
+import com.example.hoang.hoabanfood1.Activity.VideosActivity;
 import com.example.hoang.hoabanfood1.Interface.CallAPIYoutubeSuccess;
 import com.example.hoang.hoabanfood1.Model.ModelApi.CallAPI;
 import com.example.hoang.hoabanfood1.Model.ModelApi.model.MessageListVideo.Item;
@@ -30,6 +32,7 @@ import java.util.List;
 public class PlaylistAdapter extends BaseAdapter {
 
     private Context context;
+    public static String videoid;
     CallAPI callAPI;
     ArrayList<ModelPlayListVideo> playlistArrayList = new ArrayList<>();
     VideoYoutubeAdapter videoYoutubeAdapter;
@@ -83,17 +86,17 @@ public class PlaylistAdapter extends BaseAdapter {
         viewHolder.lvplaylist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intentvideoview = new Intent(context, VideosActivity.class);
-                String videoid = String.valueOf(modelPlayListVideo.getListplaylist().get(position).getVideoid());
+                Intent intentvideoview = new Intent(context, VideosActivity.class);
+                videoid = String.valueOf(modelPlayListVideo.getListplaylist().get(position).getVideoid());
                 String playlistid = modelPlayListVideo.getListplaylist().get(position).getPlaylistid();
                 String videotitle = modelPlayListVideo.getListplaylist().get(position).getTitle();
-//                intentvideoview.putExtra("videoid", videoid);
-//                intentvideoview.putExtra("playlistid", playlistid);
-//                intentvideoview.putExtra("videotitle",videotitle);
-//                context.startActivity(intentvideoview);
-                GetlistVideo(playlistid);
-                ListVideoActivity.txtvvideotitle.setText(videotitle);
-                ListVideoActivity.mYouTubeVideoView.show();
+                intentvideoview.putExtra("videoid", videoid);
+                intentvideoview.putExtra("playlistid", playlistid);
+                intentvideoview.putExtra("videotitle",videotitle);
+                context.startActivity(intentvideoview);
+//                GetlistVideo(playlistid);
+//                ListVideoActivity.txtvvideotitle.setText(videotitle);
+//                ListVideoActivity.mYouTubeVideoView.show();
 
             }
         });

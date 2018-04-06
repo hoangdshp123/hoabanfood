@@ -2,13 +2,14 @@ package com.example.hoang.hoabanfood1.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class Cart extends AppCompatActivity {
     TextView txtvusername;
     String tam;
     AlertDialog.Builder builder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,30 +51,31 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (tam.equals("")) {
-                    AlertDialog.Builder builder;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        builder = new AlertDialog.Builder(Cart.this);
-                    } else
-                        builder = new AlertDialog.Builder(Cart.this);
-
-                    builder.setTitle("Bạn chưa đăng nhập").setMessage("Bạn có muốn đăng nhập ?").
-                            setPositiveButton("No",new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                }
-                            });
-                    builder.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intentdialog = new Intent(getApplicationContext(),Login.class);
-                            startActivity(intentdialog);
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                }
-                else {
-                    Intent intentdsdh = new Intent(Cart.this,Dsdonhang.class);
+//                    AlertDialog.Builder builder;
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                        builder = new AlertDialog.Builder(Cart.this);
+//                    } else
+//                        builder = new AlertDialog.Builder(Cart.this);
+//
+//                    builder.setTitle("Bạn chưa đăng nhập").setMessage("Bạn có muốn đăng nhập ?").
+//                            setPositiveButton("No",new DialogInterface.OnClickListener() {
+//                                @Override
+//                                public void onClick(DialogInterface dialog, int which) {
+//                                }
+//                            });
+//                    builder.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            Intent intentdialog = new Intent(getApplicationContext(),Login.class);
+//                            startActivity(intentdialog);
+//                        }
+//                    });
+//                    AlertDialog dialog = builder.create();
+//                    dialog.show();
+                    displayAlertDialog();
+                } else {
+                    Intent intentdsdh = new Intent(Cart.this, Dsdonhang.class);
+                    intentdsdh.putExtra("2", "type4");
                     startActivity(intentdsdh);
                     finish();
                 }
@@ -84,37 +87,21 @@ public class Cart extends AppCompatActivity {
         btndathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tam.equals("")) {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        builder = new AlertDialog.Builder(Cart.this);
-                    } else
-                        builder = new AlertDialog.Builder(Cart.this);
+                if (MainActivity.manggiohang.size() > 0) {
+                    if (tam.equals("")) {
+                        Intent intentttkh = new Intent(getApplicationContext(), ThongtinKH.class);
+                        intentttkh.putExtra("1", "type1");
+                        startActivity(intentttkh);
+                        finish();
+                    } else {
 
-                    builder.setTitle("Bạn chưa đăng nhập").setMessage("Bạn có muốn đăng nhập ?").
-                            setPositiveButton("No",new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-                    builder.setNegativeButton("Yes",new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intentdialog = new Intent(getApplicationContext(),Login.class);
-                            startActivity(intentdialog);
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
-                } else {
-                    if(MainActivity.manggiohang.size()>0){
-                        Intent intentttkh = new Intent(getApplicationContext(),ThongtinKH.class);
+                        Intent intentttkh = new Intent(getApplicationContext(), ThongtinKH.class);
+                        intentttkh.putExtra("1", "type2");
                         startActivity(intentttkh);
                         finish();
                     }
-                    else
-                        Toast.makeText(Cart.this, "Giỏ hàng của bạn đang trống !", Toast.LENGTH_SHORT).show();
-                }
+                } else
+                    Toast.makeText(Cart.this, "Giỏ hàng của bạn đang trống !", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -167,4 +154,41 @@ public class Cart extends AppCompatActivity {
         tam = txtvusername.getText().toString();
     }
 
+    public void displayAlertDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        View alertLayout = inflater.inflate(R.layout.customdialog, null);
+        final EditText etUsername = (EditText) alertLayout.findViewById(R.id.edt_account_dh);
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setTitle("Nhập username");
+        alert.setView(alertLayout);
+        alert.setCancelable(false);
+        alert.setNegativeButton("Trở lại", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        alert.setPositiveButton("Xem đơn hàng", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // code for matching password
+                String user = etUsername.getText().toString();
+                if(user.equals("")){
+                    Toast.makeText(Cart.this, "Chưa nhập username !", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent intentdsdh = new Intent(Cart.this, Dsdonhang.class);
+                    intentdsdh.putExtra("2", "type3");
+                    intentdsdh.putExtra("name", user);
+                    startActivity(intentdsdh);
+                }
+            }
+        });
+        AlertDialog dialog = alert.create();
+        dialog.show();
+    }
 }

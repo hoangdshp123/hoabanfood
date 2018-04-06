@@ -46,6 +46,8 @@
             android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/iconphonenumber"
             android:drawablePadding="30dp"
+            android:inputType="number"
+            android:maxLength="11"
             android:hint="Phone number" />
 
         <TextView

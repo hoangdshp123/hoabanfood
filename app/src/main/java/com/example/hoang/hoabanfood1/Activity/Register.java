@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class Register extends AppCompatActivity {
     EditText edtaccount, edtpassword, edtretypepass, edttenkh, edtphonenumber;
     Button btnregister;
-    int k;
     ArrayList<String> username1 = new ArrayList<>();
     ProgressDialog progressDialog;
 
@@ -40,6 +39,7 @@ public class Register extends AppCompatActivity {
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int k=0;
                 String username = edtaccount.getText().toString();
                 String password = edtpassword.getText().toString();
                 String retypepass = edtretypepass.getText().toString();
@@ -53,7 +53,12 @@ public class Register extends AppCompatActivity {
                 if (username.equals("") || password.equals("") || name.equals("") || phonenumber.equals("")) {
                     progressDialog.dismiss();
                     Toast.makeText(Register.this, "Chưa nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if(phonenumber.length()<9){
+                    progressDialog.dismiss();
+                    Toast.makeText(Register.this, "Chưa nhập đúng định dạng sđt", Toast.LENGTH_SHORT).show();
+                }
+                else {
                     for (int i = 0; i < username1.size(); i++) {
                         if (username.equals(username1.get(i).toString())) {
                             k++;
